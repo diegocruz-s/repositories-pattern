@@ -4,15 +4,14 @@ import { User } from "../../models/user";
 
 export class MongoGetUsersRepositories implements IGetUsersRepository {
     async getUsers(): Promise<User[]> {
-        const users = await MongoClient.db.collection<User>('users').find({}).toArray()
+        const users = await MongoClient.db
+            .collection<Omit<User, 'id'>>('users')
+            .find({})
+            .toArray()
 
-        return [{
-            id: '',
-            firstName: 'Diego M.',
-            lastName: 'Cruz',
-            email: 'diego@gmail.com',
-            password: 'Diego@123'
-        }]
+        return users.map(({ _id, ...rest }) => ({ 
+            ...rest, id: _id.toHexString() 
+        }))
     }
 }
 
@@ -26,4 +25,4 @@ export class PostgresGetUsersRepositories implements IGetUsersRepository {
             password: 'Diego@123'
         }]
     }
-}
+} 
