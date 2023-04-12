@@ -39,7 +39,6 @@ export class CreateUserController implements ICreateUserController {
                 }
             }
             
-    
             const user = await this.createUserRepository.createUser(httpResquest.body)
 
             return {
