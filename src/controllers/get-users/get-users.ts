@@ -9,7 +9,7 @@ export class GetUsersControllers implements IGetUsersController {
     }
 
     // posso resumir tudo isso para isso:
-    //constructor(private readonly getUsersRepository: IGetUsersRepository) {}
+    // constructor(private readonly getUsersRepository: IGetUsersRepository) {}
     
     async handle() {
         // validar requisição
